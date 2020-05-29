@@ -44,6 +44,7 @@ while True:
         [sg.InputText('1', key='overlevering_pct'), sg.Text('overlevering %')],
         [sg.InputText('10', key='ee'), sg.Text('extra etiketten')],
         [sg.InputText('10', key='wikkel'), sg.Text('Wikkel')],
+        [sg.InputText('opmerkingen', key='opmerkingen'), sg.Text('Opmerkingen')],
 
         [sg.Button("Ok"), sg.Cancel()],
         # run button
@@ -149,6 +150,7 @@ while True:
 
             aantal_banen = int(mes * aantal_vdps)
             file_in = pd.read_csv(name_file_in, delimiter=";", dtype="str")  # try except
+
 
             totaal = file_in.aantal.astype(int).sum()
             min_waarde = file_in.aantal.astype(int).min()
@@ -285,8 +287,11 @@ while True:
                 for file_pad in cleaning_paden_met_Dir_lijst:
                     cleaner(file_pad)
 
-                for file_pad in cleaning_paden_met_Dir_lijst:
-                    file_pad.rmdir()
+                # for file_pad in cleaning_paden_met_Dir_lijst:
+                #     file_pad.rmdir()
+
+                # todo check why do ineed to write the df to csv again
+                file_in.to_csv(name_file_in, sep=";", index=0)
 
                 # cleaner(source) #todo lijstin netjes verwijderen
 
