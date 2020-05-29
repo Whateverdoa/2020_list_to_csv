@@ -21,7 +21,7 @@ while True:
     layout = [
         [sg.Text('VDP invul formulier', size=(30, 1), font=('Arial', 14, 'bold'), text_color="orange")],
         [sg.InputText('202012345', key='ordernummer_1'), sg.Text('Ordernummer', font=('Arial', 12))],
-        [sg.InputText('8', key='mes'), sg.Text('mes', font=('Arial', 12))],
+        [sg.InputText('4', key='mes'), sg.Text('mes', font=('Arial', 12))],
         [sg.InputText('1', key='vdp_aantal'), sg.Text("VDP's", font=('Arial', 12))],
         [sg.InputText('0', key='afwijkings_waarde'), sg.Text("afwijking_waarde", font=('Arial', 12))],
 
@@ -146,7 +146,10 @@ while True:
             stapel = paden_dict['stapel']
             VDP_map =paden_dict['VDP_map']
             # result = paden_dict["result"]
-            result = name_file_in.parent
+            order = f'{name_file_in.stem}_order'
+            print(order)
+            name_file_in.parent.joinpath(order).mkdir(parents=True, exist_ok=True)
+            result = name_file_in.parent.joinpath(order)
 
             aantal_banen = int(mes * aantal_vdps)
             file_in = pd.read_csv(name_file_in, delimiter=";", dtype="str")  # try except
@@ -290,8 +293,10 @@ while True:
                 # for file_pad in cleaning_paden_met_Dir_lijst:
                 #     file_pad.rmdir()
 
-                # todo check why do ineed to write the df to csv again
-                file_in.to_csv(name_file_in, sep=";", index=0)
+                # todo check why do i need to write the df to csv again : fixed it by placing result files in a separate new folder
+                # onder staande werkt als je de files wegschrijft in dezelfde map.
+
+                # file_in.to_csv(name_file_in, sep=";", encoding="utf-8", index=0)
 
                 # cleaner(source) #todo lijstin netjes verwijderen
 

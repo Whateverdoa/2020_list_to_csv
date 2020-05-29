@@ -358,13 +358,13 @@ def wikkel_n_baans_tc(input_vdp_posix_lijst, etiketten_Y, in_loop, mes, uit):
     inlooplijst = (";stans.pdf;" * mes)
     inlooplijst = '0;'+ inlooplijst[:-1] + "\n" # -1 removes empty column in final file
 
-    for file_naam in input_vdp_posix_lijst:
+    for vdp_file_naam in input_vdp_posix_lijst:
 
 
-        filenaamuit = f'def_{Path(file_naam).stem}.csv'
+        filenaamuit = f'def_{Path(vdp_file_naam).stem}.csv'
         file_naam_met_pad = Path(uit).joinpath(filenaamuit)
 
-        with open(f"{file_naam}", "r", encoding="utf-8") as target:
+        with open(f"{vdp_file_naam}", "r", encoding="utf-8") as target:
             readline = target.readlines()
         # pad.with_name("VDP_map").joinpath(f'{pad.stem}_inloop.csv)'))
 
