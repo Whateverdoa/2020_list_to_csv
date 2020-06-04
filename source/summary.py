@@ -97,8 +97,8 @@ def summary_file(pad, order_num, *args):
         print(f'aantal rollen : {summary_values_from_arg[1]} : zie excel print voor rol specificaties', file=summary)
         # print(f'totaal: {summary_values_from_arg[2]}', file = summary)
         # print(f'gemiddelde: {summary_values_from_arg[3]}', file = summary)
-        print(f'wikkel = {summary_values_from_arg[8]} etiket(ten)', file=summary)
-        print(f'extra etiketten per rol = {summary_values_from_arg[9]}', file=summary)
+        print(f'wikkel = {summary_values_from_arg[9]} etiket(ten)', file=summary)
+        print(f'extra etiketten per rol = {summary_values_from_arg[10]}', file=summary)
 
         print(f'inloop en uitloop: {summary_values_from_arg[5]}', file=summary)
         print(f"Y waarde = {summary_values_from_arg[7]}", file=summary)

@@ -120,7 +120,7 @@ def banen_builder(lijst_van_split_csv, posix_pad_tmp, posix_pad_vdps_uit, wikkel
         # print(trespa_lijst[0:1])
 
         oap = overaantalpercentage = 1  # 1.02 = 2% overlevering
-        ee = 4  # = etiketten overlevering handmatig
+        # ee = 10  # = etiketten overlevering handmatig
 
         df = trespa_lijst[["Colorcode", "beeld", "aantal"]]
         df.to_csv("lijst_in.csv", index=0)
