@@ -354,7 +354,7 @@ def kolom_naam_gever_omschrijving_pdf(mes=1):
 
 def wikkel_n_baans_tc(input_vdp_posix_lijst, etiketten_Y, in_loop, mes,wikkel, uit):
     """last step voor VDP adding in en uitloop"""
-    in_uitloop = in_loop - etiketten_Y
+    in_uitloop = (in_loop - etiketten_Y) - wikkel # etiketten Y moet dan groter zijn als wikkel:(
 
     inlooplijst = (";stans.pdf;" * mes)
     inlooplijst = '0;'+ inlooplijst[:-1] + "\n" # -1 removes empty column in final file
