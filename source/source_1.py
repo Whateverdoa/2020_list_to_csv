@@ -227,11 +227,14 @@ while True:
 
                 #  maak een lijst in lijst voor als er meer vdps gemaakt moeten worden.
                 print(f"aantal VDP's {aantal_vdps}")
-                lijst_tmp2 = csv_builder.lijst_opbreker(vdps, mes, aantal_vdps)
+                lijst_tmp2 = sorted(csv_builder.lijst_opbreker(vdps, mes, aantal_vdps)) # sorted toegevoegd
 
                 print(f'lijst_tmp2  is lijsten in lijst! = {lijst_tmp2}')
 
                 input_lijst = sorted(csv_builder.lijst_opbreker(lijst_tmp2, mes, aantal_vdps))
+
+                print(f'input lijst = {input_lijst}')
+
 
 
                 csv_builder.horizontaal_samenvoegen(lijst_tmp2, VDP_map, mes, ordernummer)
@@ -240,7 +243,7 @@ while True:
 
                 lijst_uit_vdp_map = csv_builder.lijstmaker_uit_posixpad_csv(VDP_map)
                 print("1")
-                csv_builder.wikkel_n_baans_tc(lijst_uit_vdp_map, etikettenY, inloop, mes, result)
+                csv_builder.wikkel_n_baans_tc(lijst_uit_vdp_map, etikettenY, inloop, mes, wikkel, result)
                 print("2 inloop uitloop")
                 # todo fine tune in uit
 

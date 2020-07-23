@@ -29,14 +29,14 @@ def splitter(file_in,
             begin_eind_lijst.append([c, a, num + 1])
             be_LIJST.append([a, num + 1])
 
-            csv_naam = Path(f"{outgoing_posix_pad}/{a:>{0}{5}}.csv")
+            csv_naam = Path(f"{outgoing_posix_pad}/tmp_{a:>{0}{5}}.csv")
             print(csv_naam)
             file_in.iloc[a : (num + 1)].to_csv(csv_naam)
             print("splitter klaar")
 
         elif b >= ongeveer_per_baan + afwijkings_waarde:
 
-            csv_naam = Path(f"{outgoing_posix_pad}/{a:>{0}{5}}.csv")
+            csv_naam = Path(f"{outgoing_posix_pad}/tmp_{a:>{0}{5}}.csv")
             print(csv_naam)
             file_in.iloc[a : (num + 1)].to_csv(csv_naam) # num + 1 ??
 
@@ -92,13 +92,13 @@ def print_trespa_rolls(colorcode, beeld, aantal, filenaam_uit, wikkel, ee = 10):
 
         print(f";stans.pdf\n" * wikkel, end="", file=fn)
         print(f"{colorcode}: {aantal} etiketten;leeg.pdf\n" * 1, end="", file=fn)
-        print(f";stans.pdf\n" * 1, end="", file=fn)
+        # print(f";stans.pdf\n" * 1, end="", file=fn)
 
         print(f";{beeld}\n" * int(aantal * oap + ee), end="", file=fn)
 
-        print(f";stans.pdf\n" * 1, end="", file=fn)
+        # print(f";stans.pdf\n" * 1, end="", file=fn)
         print(f"{colorcode}: {aantal} etiketten;leeg.pdf\n", end="", file=fn)
-        print(f";stans.pdf\n" * 1, end="", file=fn)
+        # print(f";stans.pdf\n" * 1, end="", file=fn)
 
     return 3 + int(aantal * oap + ee)
 
@@ -223,7 +223,7 @@ def summary_file(pad, order_num, *args):
         print(f'inloop en uitloop: {summary_values_from_arg[5]}', file = summary)
         print(f"Y waarde ={summary_values_from_arg[7]}", file= summary)
         print("_" * 50, file= summary)
-        print("aantal staat voor en elke rol op sluit etiket", file=summary)
+        print("aantal staat voor en na elke rol op sluit etiket", file=summary)
 
 
     return len(summary_values_from_arg)
@@ -352,8 +352,9 @@ def kolom_naam_gever_omschrijving_pdf(mes=1):
     return namen
 
 
-def wikkel_n_baans_tc(input_vdp_posix_lijst, etiketten_Y, in_loop, mes, uit):
+def wikkel_n_baans_tc(input_vdp_posix_lijst, etiketten_Y, in_loop, mes,wikkel, uit):
     """last step voor VDP adding in en uitloop"""
+    in_uitloop = in_loop - etiketten_Y
 
     inlooplijst = (";stans.pdf;" * mes)
     inlooplijst = '0;'+ inlooplijst[:-1] + "\n" # -1 removes empty column in final file
@@ -372,18 +373,24 @@ def wikkel_n_baans_tc(input_vdp_posix_lijst, etiketten_Y, in_loop, mes, uit):
         with open(file_naam_met_pad, "w", encoding="utf-8") as target:
             target.writelines(kolom_naam_gever_omschrijving_pdf(mes))
 
-            target.writelines(readline[1:etiketten_Y + 1])
-            # target.writelines(readline[16:(etikettenY+etikettenY-8)])
+
+            beginrol = wikkel + 1
+            eerste_in_rol = beginrol + etiketten_Y
+
+            target.writelines(readline[beginrol:eerste_in_rol])
+            # target.writelines(readline[3:4])
 
             target.writelines(
-                (inlooplijst) * in_loop)  # inloop
+                (inlooplijst) * in_uitloop)  # inloop
             print("inloop maken")
             target.writelines(readline[1:])  # bestand
 
             target.writelines(
-                (inlooplijst) * in_loop)  # inloop  # uitloop
+                (inlooplijst) * in_uitloop)  # inloop  # uitloop
             print("uitloop maken")
             target.writelines(readline[-etiketten_Y:])
+            # target.writelines(readline[1:etiketten_Y + 1])
+            target.writelines(readline[beginrol:eerste_in_rol])
 
 
 def end_result_csv(final_list, mes):
