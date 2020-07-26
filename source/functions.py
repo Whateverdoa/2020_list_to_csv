@@ -81,6 +81,7 @@ def check_map_op_mes(mes,
 def print_trespa_rolls(colorcode, beeld, aantal, filenaam_uit, wikkel, ee = 10):
     """
     Take line from list and build csv for that line
+    extra stans voor en na uitgezet
     """
     # todo finetune wikkel
     oap = overaantalpercentage = 1  # 1.02 = 2% overlevering
