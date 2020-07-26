@@ -239,7 +239,7 @@ def lijst_opbreker(lijst_in, mes, combinaties):
         combinatie_binnen_mes.append(lijst_in[start:end])
         start += mes
         end += mes
-    return combinatie_binnen_mes
+    return sorted(combinatie_binnen_mes)
 
 
 def kol_naam_lijst_builder(mes_waarde=1):
@@ -391,6 +391,7 @@ def wikkel_n_baans_tc(input_vdp_posix_lijst, etiketten_Y, in_loop, mes,wikkel, u
             target.writelines(readline[-etiketten_Y:])
             # target.writelines(readline[1:etiketten_Y + 1])
             target.writelines(readline[beginrol:eerste_in_rol])
+
 
 
 def end_result_csv(final_list, mes):
