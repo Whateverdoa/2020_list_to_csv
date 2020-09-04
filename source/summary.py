@@ -104,7 +104,7 @@ def summary_file(pad, order_num, *args):
         print(f"Y waarde = {summary_values_from_arg[7]}", file=summary)
         print("_" * 50, file=summary)
 
-        print("aantal staat voor en elke rol op sluit etiket", file=summary)
+        print("aantal staat voor en na elke rol op sluit etiket", file=summary)
 
     return len(summary_values_from_arg)
 

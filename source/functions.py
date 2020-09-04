@@ -353,7 +353,7 @@ def kolom_naam_gever_omschrijving_pdf(mes=1):
     return namen
 
 
-def wikkel_n_baans_tc(input_vdp_posix_lijst, etiketten_Y, in_loop, mes,wikkel, uit):
+def wikkel_n_baans_tc(input_vdp_posix_lijst, etiketten_Y, in_loop, mes, wikkel, uit):
     """last step voor VDP adding in en uitloop"""
     in_uitloop = (in_loop - etiketten_Y) - wikkel # etiketten Y moet dan groter zijn als wikkel:(
 
@@ -389,7 +389,7 @@ def wikkel_n_baans_tc(input_vdp_posix_lijst, etiketten_Y, in_loop, mes,wikkel, u
             target.writelines(
                 (inlooplijst) * in_uitloop)  # inloop  # uitloop
             print("uitloop maken")
-            target.writelines(readline[-etiketten_Y:])
+            # target.writelines(readline[-etiketten_Y:])
             # target.writelines(readline[1:etiketten_Y + 1])
             target.writelines(readline[beginrol:eerste_in_rol])
 
